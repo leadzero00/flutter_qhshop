@@ -12,6 +12,11 @@ import './provide/indexhome_tabbar.dart';
 import './provide/cikakecheng.dart';
 import './provide/videokecheng.dart';
 
+//路由注入
+import './routers/application.dart';
+import './routers/routes.dart';
+import 'package:fluro/fluro.dart';
+
 void main() {
   var tabbarlist = IndexHomeTabbarProvide();
   var cikekecheng = CiKaKechengProvide();
@@ -31,9 +36,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
    // var greenAccent = Colors.greenAccent;
+   //路由注入
+   final router = Router();
+   Routes.voidconfigureRoutes(router);
+   Appliaction.router = router;
+   //路由注入结束
         return MaterialApp(
           title: '仟汇商学院',
           debugShowCheckedModeBanner: false,
+          //----------------路由主要代码start
+          onGenerateRoute: Appliaction.router.generator,
+          //----------------路由主要代码end
           theme: ThemeData(
             primarySwatch: Colors.lightGreen,
       ),
