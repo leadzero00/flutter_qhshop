@@ -56,33 +56,28 @@ class _IndexPageBarState extends State<IndexPageBar> {
     MyhomePage(),
     MediaPage(),
     KaoshiPage(),
-    KechengPage(),
+    KechengPage(),//*-
     MemberPage()
   ]; //小主页面
 
-  int currentIndex = 0; //切换页面编号
-  var currentPage; //当前显示页面
+ // int currentIndex = 0; //切换页面编号
+ // var currentPage; //当前显示页面
 
   //String ceshi = '123';
   @override
   void initState() {
-   // print('长度啊啊啊啊啊啊====>${Provide.value<IndexHomeTabbarProvide>(context).listbar.length}');
-    // if (Provide.value<IndexHomeTabbarProvide>(context).listbar.length >= 3) {
-    //   bottomTabs = Provide.value<IndexHomeTabbarProvide>(context).listbar;
-    // } else {
-    
-    // }
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Provide<IndexHomeTabbarProvide>(
+      builder:(context,child,snashot){
+        return Scaffold(
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          currentIndex: currentIndex,
-          items: Provide.value<IndexHomeTabbarProvide>(context).listbar.map(
+          currentIndex:snashot.currentIndex,
+          items: snashot.listbar.map(
             (val){
               return BottomNavigationBarItem(
             icon: Image.network(val['image']), title: Text('${val['title']}'));
@@ -90,14 +85,16 @@ class _IndexPageBarState extends State<IndexPageBar> {
           ).toList(),//通过list索引后的方式显示底部导航栏
           onTap: (index) {
             setState(() {
-              currentIndex = index;
-              currentPage = tabBoids[currentIndex]; //切换页面
+              snashot.setCurrentIndex(index);
+              snashot.setCurrentPage(tabBoids[snashot.currentIndex]); //切换页面
             });
           },
         ),
         body: IndexedStack(
-          index: currentIndex,
+          index: snashot.currentIndex,
           children: tabBoids,
         ));
+      },
+    );
   }
 }
