@@ -9,6 +9,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import '../Indexhome_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /*
  *注册界面
@@ -353,11 +354,13 @@ class _SignInPageState extends State<SignInPage> {
           style: new TextStyle(fontSize: 25, color: Colors.white),
         ),
       ),
-      onTap: () {
+      onTap: () async{
+        SharedPreferences sp = await SharedPreferences.getInstance();
         /*利用key来获取widget的状态FormState
               可以用过FormState对Form的子孙FromField进行统一的操作
            */
         if (_SignInFormKey.currentState.validate()) {
+          
           //如果输入都检验通过，则进行登录操作
           Scaffold.of(context)
               .showSnackBar(new SnackBar(content: new Text("执行登录操作")));
@@ -375,6 +378,9 @@ class _SignInPageState extends State<SignInPage> {
              //print(sess);
             if(sess=="seccuse"){
              // print('222222');
+             
+             sp.setInt('loginkey', 1);//登陆验证token
+             print('sp的数值======>${sp.getInt('loginkey')}');
              return  Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder:(context)=>MyIndexPage()), (route)=> route==null);//首页跳转
             }else{
             return Fluttertoast.showToast(
@@ -394,7 +400,8 @@ class _SignInPageState extends State<SignInPage> {
       },
     );
   }
-
+  
+   
   Future postlogin(var url,{formdata}) async{
     try{
      Response response;

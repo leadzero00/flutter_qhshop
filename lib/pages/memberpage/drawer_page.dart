@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../homepage/home_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LeftDrawerPage extends StatelessWidget {
   @override
@@ -71,11 +72,19 @@ class LeftDrawerPage extends StatelessWidget {
             new ListTile(   //退出按钮
               title: new Text('Close'),
               trailing: new Icon(Icons.cancel),
-              onTap: () => Navigator.of(context).pop(),   //点击后收起侧边栏
+              onTap: () {
+              setloginkey();//退出登陆
+              Navigator.of(context).pop();
+               },   //点击后收起侧边栏
             ),
           ],
         ),
     
     );
+  }
+
+  setloginkey()async{
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    sp.setInt('loginkey', 0);
   }
 }

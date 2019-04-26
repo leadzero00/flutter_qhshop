@@ -12,6 +12,10 @@ import '../../provide/cikakecheng.dart';
 import '../../model/vidokechengmodel.dart';
 import '../../provide/videokecheng.dart';
 
+//路由
+import '../../routers/application.dart';
+import 'package:fluro/fluro.dart';
+
 class Homepages extends StatefulWidget {
   @override
   _HomepagesState createState() => _HomepagesState();
@@ -20,6 +24,7 @@ class Homepages extends StatefulWidget {
 class _HomepagesState extends State<Homepages> {
   GlobalKey<RefreshFooterState> _footerKey =
       new GlobalKey<RefreshFooterState>();
+      
   @override
   void initState() {
     getcikakechengrequst();
@@ -30,6 +35,7 @@ class _HomepagesState extends State<Homepages> {
 
   @override
   Widget build(BuildContext context) {
+    
     //获取次卡课程信息
     return Container(
       color: Colors.black12,
@@ -173,6 +179,7 @@ class NoticeInfo extends StatelessWidget {
         autoplay: true,
         onTap: (index1) {
           print('我按了第${index1}个文字');
+          Appliaction.router.navigateTo(context, "/detail?id=SB961092");
           return Fluttertoast.showToast(
               msg: "我准备进入" + item[index1]['title'],
               toastLength: Toast.LENGTH_SHORT,
@@ -195,14 +202,15 @@ class TopNavigater extends StatelessWidget {
   Widget _gridviewItemUi(BuildContext context, item) {
     return InkWell(
       onTap: () {
-        return Fluttertoast.showToast(
-            msg: "我准备进入" + item['title'],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIos: 1,
-            backgroundColor: Colors.pink,
-            textColor: Colors.white,
-            fontSize: 16.0);
+        Appliaction.router.navigateTo(context, "/detail?id=${item['title']}");
+        // return Fluttertoast.showToast(
+        //     msg: "我准备进入" + item['title'],
+        //     toastLength: Toast.LENGTH_SHORT,
+        //     gravity: ToastGravity.CENTER,
+        //     timeInSecForIos: 1,
+        //     backgroundColor: Colors.pink,
+        //     textColor: Colors.white,
+        //     fontSize: 16.0);
       },
       child: Column(
         children: <Widget>[
@@ -260,14 +268,15 @@ class Adbanner extends StatelessWidget {
               color: Colors.white,
               child: InkWell(
                 onTap: () {
-                  return Fluttertoast.showToast(
-                      msg: "我准备进入" + adbanner[0]['title'],
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.CENTER,
-                      timeInSecForIos: 1,
-                      backgroundColor: Colors.pink,
-                      textColor: Colors.white,
-                      fontSize: 16.0);
+                  Appliaction.router.navigateTo(context, "/detail?id=${adbanner[0]['title']}");
+                  // return Fluttertoast.showToast(
+                  //     msg: "我准备进入" + adbanner[0]['title'],
+                  //     toastLength: Toast.LENGTH_SHORT,
+                  //     gravity: ToastGravity.CENTER,
+                  //     timeInSecForIos: 1,
+                  //     backgroundColor: Colors.pink,
+                  //     textColor: Colors.white,
+                  //     fontSize: 16.0);
                 },
                 child:
                     Image.network('${adbanner[0]['image']}', fit: BoxFit.fill),

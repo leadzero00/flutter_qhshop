@@ -6,8 +6,13 @@ import 'package:flutter/material.dart';
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-     // child: child,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+        centerTitle: true,
+      ),
+      body: Text(title),
     );
+   
   }
 }

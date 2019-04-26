@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import './membertitle_page.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import './member_navigator.dart';
 import './drawer_page.dart';
 

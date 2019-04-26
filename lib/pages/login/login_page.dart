@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   new SizedBox(
-                    height: ScreenUtil().setHeight(90),
+                    height: ScreenUtil().setHeight(20),
                   ),
                   //可以用SizeBox这种写法代替Padding：在Row或者Column中单独设置一个方向的间距的时候
                   // new Padding(padding: EdgeInsets.only(top: 75)),
@@ -93,7 +93,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                           child: new Center(
                             child: new FlatButton(
                               onPressed: () {
-                                print('hahahahahahahahahahahhah');
+                             //   print('hahahahahahahahahahahhah');
                                 _pageController.animateToPage(0,
                                     duration: Duration(milliseconds: 500),
                                     curve: Curves.decelerate);
